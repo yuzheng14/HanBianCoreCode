@@ -1,7 +1,7 @@
 package POJO;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -19,6 +19,8 @@ public class Korean {
     private static final HashMap<Character, Integer> leadMap = new HashMap<>();
     private static final HashMap<Character, Integer> vowelMap = new HashMap<>();
     private static final HashMap<Character, Integer> tailMap = new HashMap<>();
+
+    private static final ArrayList<String[]> otherSymbolList = new ArrayList<>();
 
     static {
         leadMap.put('ㄱ', 0);
@@ -122,8 +124,9 @@ public class Korean {
 
                 stringBuffer.append(leadSet[lead]);
                 stringBuffer.append(vowelSet[vowel]);
-                stringBuffer.append(tailSet[tail]);
-
+                if (tail!=0) {
+                    stringBuffer.append(tailSet[tail]);
+                }
             } else {
                 stringBuffer.append(c);
             }
@@ -151,46 +154,101 @@ public class Korean {
         StringBuffer resultBuffer = new StringBuffer();
         int offset = 0;
         ArrayList<String> jamoList = new ArrayList<>();
+        addOtherSymbolList(jamos);
+        jamos = onlyRemainHangul(jamos);
         for (int i = 2; i < jamos.length(); i++) {
-            if (i == jamos.length() - 1) {
+            if ((i == jamos.length() - 1) && (!isVowel(jamos.charAt(i)))) {
                 jamoList.add(jamos.substring(offset, jamos.length()));
                 continue;
-            }
-            if (!isVowel(jamos.charAt(i)) && !isVowel(jamos.charAt(i - 1))) {
-                jamoList.add(jamos.substring(offset, i));
-                offset = i;
+            } else if (i == jamos.length() - 1) {
+                jamoList.add(jamos.substring(offset, i - 1));
+                jamoList.add(jamos.substring(i - 1, jamos.length()));
+            } else if (isVowel(jamos.charAt(i))) {
+                jamoList.add(jamos.substring(offset, i - 1));
+                offset = i - 1;
             }
         }
         for (String string : jamoList) {
             char c;
-            if (string.length()==2) {
-                int i =leadMap.get(string.charAt(0))*588+vowelMap.get(string.charAt(1)*28)+44032;
-                c=i+'0';
+            int i;
+            System.out.println(string);
+            if (string.length() == 2) {
+                i = leadMap.get(string.charAt(0)) * 588 + vowelMap.get(string.charAt(1)) * 28 + 44032;
             } else {
-                
+                i = leadMap.get(string.charAt(0)) * 588 + vowelMap.get(string.charAt(1)) * 28
+                        + tailMap.get(string.charAt(2)) + 44032;
             }
+            c = (char) i;
             resultBuffer.append(c);
         }
-        return "";
+        return addOtherSymbol(resultBuffer.toString());
     }
 
-    private static boolean isConsonantOrTail(char c) {
-        HashSet<Character> consonantAndTailSet = new HashSet<>();
-        for (char ch : leadSet) {
-            consonantAndTailSet.add(ch);
-        }
-        for (char ch : tailSet) {
-            consonantAndTailSet.add(ch);
-        }
-        StringBuffer consonantAndTailBuffer = new StringBuffer();
-        for (Character character : consonantAndTailSet) {
-            consonantAndTailBuffer.append(character);
-        }
-        String consonantAndTail = consonantAndTailBuffer.toString();
-        return consonantAndTail.contains("" + c);
-    }
-
+    /**
+     * 判断是否为母音
+     * 
+     * @param c
+     * @return
+     */
     private static boolean isVowel(char c) {
         return String.valueOf(vowelSet).contains("" + c);
+    }
+
+    /**
+     * 只保留韩语文字部分
+     * 
+     * @param s
+     * @return
+     */
+    private static String onlyRemainHangul(String s) {
+        StringBuffer stringBuffer = new StringBuffer();
+        for (int i = 0; i < s.length(); i++) {
+            if (isJamo(s.charAt(i))) {
+                stringBuffer.append(s.charAt(i));
+            }
+        }
+        return stringBuffer.toString();
+    }
+
+    /**
+     * 将字符串中的其他字符储存起来
+     * 
+     * @param s
+     */
+    private static void addOtherSymbolList(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            if (!isJamo(s.charAt(i))) {
+                otherSymbolList.add(new String[] { "" + i, "" + s.charAt(i) });
+            }
+        }
+    }
+
+    /**
+     * 判断是否为韩语字母
+     * 
+     * @param c
+     * @return
+     */
+    private static boolean isJamo(char c) {
+        String jamo = "ㄱㄲㄳㄴㄵㄶㄷㄸㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅃㅄㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ";
+        return jamo.contains("" + c);
+    }
+
+    /**
+     * 添加上OtherSymbolList中的内容
+     * 
+     * @param s
+     * @return
+     */
+    private static String addOtherSymbol(String s) {
+        for (String[] strings : otherSymbolList) {
+            System.out.println(Arrays.toString(strings));
+        }
+        StringBuffer stringBuffer = new StringBuffer(s);
+        for (String[] strings : otherSymbolList) {
+            System.out.println(Arrays.toString(strings));
+            stringBuffer.insert(Integer.parseInt(strings[0]), strings[1]);
+        }
+        return stringBuffer.toString();
     }
 }

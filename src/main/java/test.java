@@ -1,11 +1,13 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import POJO.Korean;
 
 public class test {
     public static void main(String[] args) {
-        // System.out.println(Korean.hangulToJamo("이렇게 갑작스럽게 스케줄을 변경하시면 좀 곤란한데요. "));
-        char c = 63+'0';
-        System.out.println(c);
+        // System.out.println(Korean.hangulToJamo("나랑 결혼해 줄래?"));
+        System.out.println("나랑 결혼해 줄래?");
+        System.out.println(Korean.hangulToJamo("나랑 결혼해 줄래?"));
+        System.out.println(Korean.jamoToHangul(Korean.hangulToJamo("나랑 결혼해 줄래?")));
     }
 }
