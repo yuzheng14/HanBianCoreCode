@@ -1,9 +1,7 @@
 package POJO;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class Korean {
 
@@ -124,7 +122,7 @@ public class Korean {
 
                 stringBuffer.append(leadSet[lead]);
                 stringBuffer.append(vowelSet[vowel]);
-                if (tail!=0) {
+                if (tail != 0) {
                     stringBuffer.append(tailSet[tail]);
                 }
             } else {
@@ -145,17 +143,44 @@ public class Korean {
     }
 
     /**
-     * 将字母合成为韩字
+     * 将含有韩语字母的文字中的韩语字母合成为韩字
+     * 
+     * @param jamo
+     * @return
+     */
+    public static String jamoToHangul(String jamo) {
+        boolean lastIsJamo = false;
+        int current = 0;
+        out: while (true) {
+            lastIsJamo = false;
+            current = 0;
+            for (int i = 0; i < jamo.length(); i++) {
+                if (i == 0) {
+                    lastIsJamo = isJamo(jamo.charAt(i));
+                } else if (lastIsJamo && !isJamo(jamo.charAt(i))) {
+                    jamo = jamo.replace(jamo.substring(current, i), jamosToHangul(jamo.substring(current, i)));
+                    continue out;
+                } else if (!lastIsJamo && isJamo(jamo.charAt(i))) {
+                    lastIsJamo = true;
+                    current = i;
+                }
+            }
+            break;
+        }
+
+        return jamo;
+    }
+
+    /**
+     * 将字母合成为韩字 会去除传入字符串中非韩语字母的字符
      * 
      * @param jamos
      * @return
      */
-    public static String jamoToHangul(String jamos) {
+    private static String jamosToHangul(String jamos) {
         StringBuffer resultBuffer = new StringBuffer();
         int offset = 0;
         ArrayList<String> jamoList = new ArrayList<>();
-        addOtherSymbolList(jamos);
-        jamos = onlyRemainHangul(jamos);
         for (int i = 2; i < jamos.length(); i++) {
             if ((i == jamos.length() - 1) && (!isVowel(jamos.charAt(i)))) {
                 jamoList.add(jamos.substring(offset, jamos.length()));
@@ -171,7 +196,6 @@ public class Korean {
         for (String string : jamoList) {
             char c;
             int i;
-            System.out.println(string);
             if (string.length() == 2) {
                 i = leadMap.get(string.charAt(0)) * 588 + vowelMap.get(string.charAt(1)) * 28 + 44032;
             } else {
@@ -181,7 +205,8 @@ public class Korean {
             c = (char) i;
             resultBuffer.append(c);
         }
-        return addOtherSymbol(resultBuffer.toString());
+        // return addOtherSymbol(resultBuffer.toString());
+        return resultBuffer.toString();
     }
 
     /**
@@ -195,35 +220,6 @@ public class Korean {
     }
 
     /**
-     * 只保留韩语文字部分
-     * 
-     * @param s
-     * @return
-     */
-    private static String onlyRemainHangul(String s) {
-        StringBuffer stringBuffer = new StringBuffer();
-        for (int i = 0; i < s.length(); i++) {
-            if (isJamo(s.charAt(i))) {
-                stringBuffer.append(s.charAt(i));
-            }
-        }
-        return stringBuffer.toString();
-    }
-
-    /**
-     * 将字符串中的其他字符储存起来
-     * 
-     * @param s
-     */
-    private static void addOtherSymbolList(String s) {
-        for (int i = 0; i < s.length(); i++) {
-            if (!isJamo(s.charAt(i))) {
-                otherSymbolList.add(new String[] { "" + i, "" + s.charAt(i) });
-            }
-        }
-    }
-
-    /**
      * 判断是否为韩语字母
      * 
      * @param c
@@ -232,23 +228,5 @@ public class Korean {
     private static boolean isJamo(char c) {
         String jamo = "ㄱㄲㄳㄴㄵㄶㄷㄸㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅃㅄㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ";
         return jamo.contains("" + c);
-    }
-
-    /**
-     * 添加上OtherSymbolList中的内容
-     * 
-     * @param s
-     * @return
-     */
-    private static String addOtherSymbol(String s) {
-        for (String[] strings : otherSymbolList) {
-            System.out.println(Arrays.toString(strings));
-        }
-        StringBuffer stringBuffer = new StringBuffer(s);
-        for (String[] strings : otherSymbolList) {
-            System.out.println(Arrays.toString(strings));
-            stringBuffer.insert(Integer.parseInt(strings[0]), strings[1]);
-        }
-        return stringBuffer.toString();
     }
 }
