@@ -18,8 +18,6 @@ public class Korean {
     private static final HashMap<Character, Integer> vowelMap = new HashMap<>();
     private static final HashMap<Character, Integer> tailMap = new HashMap<>();
 
-    private static final ArrayList<String[]> otherSymbolList = new ArrayList<>();
-
     static {
         leadMap.put('ㄱ', 0);
         leadMap.put('ㄲ', 1);
