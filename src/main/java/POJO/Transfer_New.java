@@ -10,15 +10,15 @@ public class Transfer_New {
     private final String doubleLastSound = "ㄺㄳㄵㄶㄼㄽㄾㅀㄻㄿㅄ";
     private final String vowel = "ㅛㅕㅑㅐㅔㅒㅖㅗㅓㅏㅣㅜㅠㅡㅚㅙㅞㅢㅝㅟㅘ";
 
-    private ArrayList<Integer> punctionList=new ArrayList<>();
+    private ArrayList<PunctionEntry> punctionList=new ArrayList<>();
     
     static{
         consonantMap.put('ㄱ', new char[]{'ㅋ', 'ㄲ', 'ㅇ', '1'});
         consonantMap.put('ㄷ', new char[]{'ㅌ', 'ㄸ', 'ㄴ', 'ㄹ'});
-        consonantMap.put('ㅂ', new char[]{'ㅍ', 'ㅃ', 'ㅁ', '1'});
-        consonantMap.put('ㅅ', new char[]{'1', 'ㅆ', '1', '1'});
-        consonantMap.put('ㅈ', new char[]{'ㅊ', 'ㅉ', '1', '1'});
-        consonantMap.put('ㅎ', new char[]{'1', '1', '1', '1'});
+        consonantMap.put('ㅂ', new char[]{'ㅍ', 'ㅃ', 'ㅁ', '\0'});
+        consonantMap.put('ㅅ', new char[]{'1', 'ㅆ', '\0', '\0'});
+        consonantMap.put('ㅈ', new char[]{'ㅊ', 'ㅉ', '\0', '\0'});
+        consonantMap.put('ㅎ', new char[]{'\0', '\0', '\0', '\0'});
     }
     
     /**
@@ -30,5 +30,48 @@ public class Transfer_New {
         return "";
     }
 
-    
+    /**
+     * 将字符串中的数字转换为汉字数词
+     * @param s
+     * @return
+     */
+    private static String numberToHangul(String s){
+        return "";
+    }
+
+    /**
+     * 存储除韩字，空格以外的其他字符
+     * @param s
+     * @return
+     */
+    private static String storeOtherPunction(String s){
+        return "";
+    }
+
+    /**
+     * 将字母转换为发音
+     * @param s
+     * @return
+     */
+    private static String JamosToPronounciation(String s){
+        return "";
+    }
+
+
+
+
+
+
+
+
+
+    /**
+     * 将punctionList中的内容添加回字符串
+     * @param s
+     * @return
+     */
+    private static String addOtherPunction(String s){
+        return "";
+    }
+
 }
