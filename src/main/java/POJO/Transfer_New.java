@@ -58,6 +58,11 @@ public class Transfer_New {
     }
 
 
+    public static String uiTransfer(String s){
+        return null;
+    }
+
+
 
 
 
