@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Transfer {
+public class Transfer_Old {
     //TODO 添加文件时间戳以及异常处理以防请求过多
     private final HashMap<Character, char[]> consonantMap;
     private final String consonant = "ㅂㅈㄷㄱㅅㅁㄴㅇㄹㅎㅋㅌㅊㅍㅃㅉㄸㄲㅆ";
@@ -21,7 +21,7 @@ public class Transfer {
     /**
      * 构造方法初始化子音Map
      */
-    public Transfer() {
+    public Transfer_Old() {
         consonantMap = new HashMap<>();
         consonantMap.put('ㄱ', new char[]{'ㅋ', 'ㄲ', 'ㅇ', '1'});
         consonantMap.put('ㄷ', new char[]{'ㅌ', 'ㄸ', 'ㄴ', 'ㄹ'});
