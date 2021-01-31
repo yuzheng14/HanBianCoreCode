@@ -36,4 +36,10 @@ public class TransferTest {
         Assert.assertEquals('汉',s3.getSymbol());
         Assert.assertEquals('字',s4.getSymbol());
     }
+    @Test
+    public void jamosToPronunciationTest() throws Exception{
+        Method method=Transfer.class.getDeclaredMethod("jamosToPronunciation", String.class);
+        method.setAccessible(true);
+        Assert.assertEquals("한구거",(String)method.invoke(Transfer.class,"한국어"));
+    }
 }
