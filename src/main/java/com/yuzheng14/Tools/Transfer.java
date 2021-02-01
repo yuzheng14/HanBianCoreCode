@@ -14,10 +14,8 @@ public class Transfer {
      * @param request
      * @return
      */
-    public static String HangulTransfer(String request) {
-        request = numbersToHangul(request);
-
-        return "";
+    public static String hangulTransfer(String request) {
+        return addOtherSymbol(jamoToHangul(jamosToPronunciation(hangulToJamo(uiTransfer(storeOtherSymbol(numbersToHangul(request)))))));
     }
 
     /**
@@ -56,11 +54,11 @@ public class Transfer {
             transfer = 0;
             for (int i = 0; i < builder.length(); i++) {
                 //判断当前是否为子音
-                if (isVowel(builder.charAt(i))) {
+                if (!isVowel(builder.charAt(i))) {
                     //判断是否为最后一个
                     if (builder.length() - 1 > i) {
                         //判断下一个是否为子音
-                        if (isVowel(builder.charAt(i + 1))) {
+                        if (!isVowel(builder.charAt(i + 1))) {
                             //两个字母是子音的情况
                             if (builder.charAt(i) == 'ㅇ' || builder.charAt(i + 1) == 'ㅎ') {
                                 continue;
@@ -150,7 +148,12 @@ public class Transfer {
      * @return
      */
     private static String addOtherSymbol(String s) {
-        return "";
+        StringBuilder builder=new StringBuilder(s);
+        for ( int i = symbolList.size()-1; i >= 0; i--) {
+            SymbolEntry entry=symbolList.get(i);
+            builder.insert(entry.getOrder(),entry.getSymbol());
+        }
+        return builder.toString();
     }
 
     /**

@@ -7,7 +7,7 @@ import com.yuzheng14.Tools.Transfer;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-
+import static com.yuzheng14.Tools.Transfer.*;
 public class TransferTest {
     @Test
     public void numbersToHangulTest(){
@@ -40,6 +40,24 @@ public class TransferTest {
     public void jamosToPronunciationTest() throws Exception{
         Method method=Transfer.class.getDeclaredMethod("jamosToPronunciation", String.class);
         method.setAccessible(true);
-        Assert.assertEquals("한구거",(String)method.invoke(Transfer.class,"한국어"));
+        Assert.assertEquals("ㅎㅏㄴㄱㅜㄱㅓ",(String)method.invoke(Transfer.class,"ㅎㅏㄴㄱㅜㄱㅇㅓ"));
+    }
+
+    @Test
+    public void addOtherSymbolTest() throws Exception{
+        Method storeOtherSymbol = Transfer.class.getDeclaredMethod("storeOtherSymbol", String.class);
+        Method addOtherSymbol = Transfer.class.getDeclaredMethod("addOtherSymbol", String.class);
+        storeOtherSymbol.setAccessible(true);
+        addOtherSymbol.setAccessible(true);
+        Assert.assertEquals("1중2汉字국 어",(String)addOtherSymbol.invoke(Transfer.class,(String)storeOtherSymbol.invoke(Transfer.class,"1중2汉字국 어")));
+    }
+
+    @Test
+    public void HangulToPronunciationTest(){
+        Assert.assertEquals("절때로 고개를 떨구지 말라",hangulTransfer("절대로 고개를 떨구지 말라"));
+        Assert.assertEquals("고개를 치켜들고 세상을 똑빠로 바라보라",hangulTransfer("고개를 치켜들고 세상을 똑바로 바라보라"));
+        Assert.assertEquals("자시네 능녀글 실뢰하라",hangulTransfer("자신의 능력을 신뢰하라"));
+        Assert.assertEquals("겸소나지만 함니적인 자신가멉시는 성공할 수도 행보갈 수도 업다",hangulTransfer("겸손하지만 합리적인 자신감없이는 성공할 수도 행복할 수도 없다"));
+
     }
 }

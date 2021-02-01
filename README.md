@@ -9,15 +9,17 @@
 
 ## Transfer类
 用于将韩语文字转换成其发音
-**目前正在重新编写**
+**已重新编写完成**
 
 # 更新说明
 ## 2021.1.31
 * 重构`jamosToPronunciation()`
 * 重构`uiTransfer()`
-
-## 更新列表
+## 2021.2.1
 * 重构`addOtherSymbol()`
 * 测试`jamosToPronunciation()`
 * 重构`HangulTransfer()`
 * 测试`HangulTransfer()`
+
+## 待更新列表
+* `jamosToPronunciation()`中鼻音化的问题
