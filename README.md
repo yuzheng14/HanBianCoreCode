@@ -2,13 +2,14 @@
 本项目为微信小程序韩变的后端核心代码
 
 ## Korean类
+**目前已拆分到仓库[Korean](https://github.com/yuzheng14/Korean)**
 ### hangulToJamo方法
 将语料中的韩语文字拆分成韩语字母
 ### jamoToHangul方法
 将语料中的韩语字母合成为韩语文字，同时不改变原语料中的其余符号
 
 ## Transfer类
-用于将韩语文字转换成其发音
+用于将韩语文字转换成其发音  
 **已重新编写完成**
 
 # 更新说明
