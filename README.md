@@ -21,7 +21,7 @@
 * 测试`jamosToPronunciation()`
 * 重构`HangulTransfer()`
 * 测试`HangulTransfer()`
-##2021.2.2
+## 2021.2.2
 * 解决`jamosToPronunciation()`中鼻音化的问题
 
 ## 待更新列表
