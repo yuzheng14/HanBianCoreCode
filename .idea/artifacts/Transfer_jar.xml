@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Transfer:jar">
+    <output-path>$PROJECT_DIR$/../repositories/artifacts/Transfer</output-path>
+    <root id="archive" name="HanBianCoreCode.jar">
+      <element id="module-output" name="HanBianCoreCode" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/Korean-1.3.2.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

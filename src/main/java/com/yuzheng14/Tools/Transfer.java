@@ -5,6 +5,22 @@ import java.util.ArrayList;
 import static com.yuzheng14.Tools.Korean.*;
 
 public class Transfer {
+    private static class SymbolEntry {
+        private final int order;
+        private final char symbol;
+        public SymbolEntry(int order, char symbol){
+            this.order=order;
+            this.symbol=symbol;
+        }
+
+        public int getOrder() {
+            return order;
+        }
+
+        public char getSymbol() {
+            return symbol;
+        }
+    }
 
     private static ArrayList<SymbolEntry> symbolList = new ArrayList<>();
 
@@ -54,13 +70,16 @@ public class Transfer {
             transfer = 0;
             for (int i = 0; i < builder.length(); i++) {
                 //判断当前是否为子音
+                if (builder.charAt(i)==' '){
+                    continue;
+                }
                 if (!isVowel(builder.charAt(i))) {
                     //判断是否为最后一个
                     if (builder.length() - 1 > i) {
                         //判断下一个是否为子音
                         if (!isVowel(builder.charAt(i + 1))) {
                             //两个字母是子音的情况
-                            if (builder.charAt(i) == 'ㅇ' || builder.charAt(i + 1) == 'ㅎ') {
+                            if ((builder.charAt(i) == 'ㅇ' && builder.charAt(i + 1) == 'ㅎ')||(builder.charAt(i) == 'ㅎ' && builder.charAt(i + 1) == 'ㅇ')||(builder.charAt(i) == 'ㅇ' && builder.charAt(i + 1) == 'ㅇ')||(builder.charAt(i) == 'ㅎ' && builder.charAt(i + 1) == 'ㅎ')) {
                                 continue;
                             } else if (builder.charAt(i + 1) == 'ㅇ') {
                                 //连音化现象
@@ -87,22 +106,26 @@ public class Transfer {
                                 }
                                 transfer++;
                             } else if ((builder.charAt(i) == 'ㄱ' || builder.charAt(i) == 'ㅂ' || builder.charAt(i) == 'ㄷ') && (builder.charAt(i + 1) == 'ㄴ' || builder.charAt(i + 1) == 'ㅁ')) {
+                                //鼻音化
                                 builder.replace(i, i + 1, "" + toNasal(builder.charAt(i)));
                                 transfer++;
-                            } else if ((builder.charAt(i) == 'ㅁ' || builder.charAt(i) == 'ㅇ') && builder.charAt(i + 1) == 'ㄹ') {
+                            } else if ((builder.charAt(i) == 'ㅂ' || builder.charAt(i) == 'ㄱ'||builder.charAt(i) == 'ㅁ' || builder.charAt(i) == 'ㅇ') && builder.charAt(i + 1) == 'ㄹ') {
+                                //鼻音化
                                 builder.replace(i + 1, i + 2, "ㄴ");
                                 transfer++;
                             } else if ((builder.charAt(i) == 'ㄴ' && builder.charAt(i + 1) == 'ㄹ') || (builder.charAt(i) == 'ㄹ' && builder.charAt(i + 1) == 'ㄴ')) {
+                                //流音化
                                 builder.replace(i, i + 2, "ㄹㄹ");
                                 transfer++;
                             } else if (((builder.charAt(i) == 'ㄱ' || builder.charAt(i) == 'ㅂ' || builder.charAt(i) == 'ㄷ') && (builder.charAt(i + 1) == 'ㅂ' || builder.charAt(i + 1) == 'ㅈ' || builder.charAt(i + 1) == 'ㄷ' || builder.charAt(i + 1) == 'ㄱ' || builder.charAt(i + 1) == 'ㅅ')) || ((builder.charAt(i) == 'ㄹ') && (builder.charAt(i + 1) == 'ㄷ' || builder.charAt(i + 1) == 'ㅅ' || builder.charAt(i + 1) == 'ㅈ'))) {
                                 //网上查一下紧音化具体的规则
                                 builder.replace(i + 1, i + 2, "" + toFortis(builder.charAt(i + 1)));
                                 transfer++;
-                            } else if ((builder.charAt(i) == 'ㅂ' || builder.charAt(i) == 'ㄱ') && (builder.charAt(i + 1) == 'ㄹ')) {
-                                builder.replace(i + 1, i + 2, "ㄴ");
                             } else if (builder.charAt(i) == 'ㅎ') {
                                 builder.replace(i, i + 2, "" + toAspirated(builder.charAt(i + 1)));
+                                transfer++;
+                            }else{
+                                builder.replace(i,i+1,""+finalConsonantToDelegateConsonant(builder.charAt(i)));
                             }
                             i++;
                         }
@@ -114,6 +137,7 @@ public class Transfer {
                 }
             }
         }
+//        System.out.println("[调用jamoToHangul()前]: "+builder.toString());
         return builder.toString();
     }
 
@@ -165,3 +189,4 @@ public class Transfer {
         return symbolList;
     }
 }
+
