@@ -62,4 +62,10 @@ public class TransferTest {
         Assert.assertEquals("겸소나지만 함니저긴 자신가멉씨는 성공할 수도 행보칼 수도 업따",hangulTransfer("겸손하지만 합리적인 자신감없이는 성공할 수도 행복할 수도 없다"));
         println("[测试成功]: "+"겸손하지만 합리적인 자신감없이는 성공할 수도 행복할 수도 없다");
     }
+
+    @Test
+    public void someOtherTest1(){
+        Assert.assertEquals("일기",hangulTransfer("읽기"));
+        Assert.assertEquals("박따",hangulTransfer("밝다"));
+    }
 }

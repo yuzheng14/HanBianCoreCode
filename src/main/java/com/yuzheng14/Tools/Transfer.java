@@ -5,23 +5,6 @@ import java.util.ArrayList;
 import static com.yuzheng14.Tools.Korean.*;
 
 public class Transfer {
-    private static class SymbolEntry {
-        private final int order;
-        private final char symbol;
-        public SymbolEntry(int order, char symbol){
-            this.order=order;
-            this.symbol=symbol;
-        }
-
-        public int getOrder() {
-            return order;
-        }
-
-        public char getSymbol() {
-            return symbol;
-        }
-    }
-
     private static ArrayList<SymbolEntry> symbolList = new ArrayList<>();
 
     /**
@@ -70,7 +53,7 @@ public class Transfer {
             transfer = 0;
             for (int i = 0; i < builder.length(); i++) {
                 //判断当前是否为子音
-                if (builder.charAt(i)==' '){
+                if (builder.charAt(i) == ' ') {
                     continue;
                 }
                 if (!isVowel(builder.charAt(i))) {
@@ -79,7 +62,7 @@ public class Transfer {
                         //判断下一个是否为子音
                         if (!isVowel(builder.charAt(i + 1))) {
                             //两个字母是子音的情况
-                            if ((builder.charAt(i) == 'ㅇ' && builder.charAt(i + 1) == 'ㅎ')||(builder.charAt(i) == 'ㅎ' && builder.charAt(i + 1) == 'ㅇ')||(builder.charAt(i) == 'ㅇ' && builder.charAt(i + 1) == 'ㅇ')||(builder.charAt(i) == 'ㅎ' && builder.charAt(i + 1) == 'ㅎ')) {
+                            if ((builder.charAt(i) == 'ㅇ' && builder.charAt(i + 1) == 'ㅎ') || (builder.charAt(i) == 'ㅎ' && builder.charAt(i + 1) == 'ㅇ') || (builder.charAt(i) == 'ㅇ' && builder.charAt(i + 1) == 'ㅇ') || (builder.charAt(i) == 'ㅎ' && builder.charAt(i + 1) == 'ㅎ')) {
                                 continue;
                             } else if (builder.charAt(i + 1) == 'ㅇ') {
                                 //连音化现象
@@ -109,7 +92,7 @@ public class Transfer {
                                 //鼻音化
                                 builder.replace(i, i + 1, "" + toNasal(builder.charAt(i)));
                                 transfer++;
-                            } else if ((builder.charAt(i) == 'ㅂ' || builder.charAt(i) == 'ㄱ'||builder.charAt(i) == 'ㅁ' || builder.charAt(i) == 'ㅇ') && builder.charAt(i + 1) == 'ㄹ') {
+                            } else if ((builder.charAt(i) == 'ㅂ' || builder.charAt(i) == 'ㄱ' || builder.charAt(i) == 'ㅁ' || builder.charAt(i) == 'ㅇ') && builder.charAt(i + 1) == 'ㄹ') {
                                 //鼻音化
                                 builder.replace(i + 1, i + 2, "ㄴ");
                                 transfer++;
@@ -124,8 +107,15 @@ public class Transfer {
                             } else if (builder.charAt(i) == 'ㅎ') {
                                 builder.replace(i, i + 2, "" + toAspirated(builder.charAt(i + 1)));
                                 transfer++;
-                            }else{
-                                builder.replace(i,i+1,""+finalConsonantToDelegateConsonant(builder.charAt(i)));
+                            } else {
+                                char c = finalConsonantToDelegateConsonant(builder.charAt(i));
+                                if (c != builder.charAt(i)) {
+                                    if (builder.charAt(i) == 'ㄺ' && builder.charAt(i + 1) == 'ㄱ')
+                                        builder.replace(i, i + 1, "" + 'ㄹ');
+                                    else
+                                        builder.replace(i, i + 1, "" + c);
+                                    transfer++;
+                                }
                             }
                             i++;
                         }
@@ -143,6 +133,7 @@ public class Transfer {
 
     /**
      * 의的音变
+     *
      * @param s
      * @return
      */
@@ -151,15 +142,15 @@ public class Transfer {
             if (s.charAt(i) == '의' && ((i + 1) < s.length() && s.charAt(i + 1) == ' ') && (i - 1 > 0 && (s.charAt(i - 1) != '회' || s.charAt(i - 1) != '의'))) {
                 s = new StringBuffer(s).replace(i, i + 1, "" + '에').toString();
             }
-            if (i>0&&s.charAt(i)=='의'&&s.charAt(i-1)!=' '){
-                s=new StringBuffer(s).replace(i,i+1,""+'이').toString();
+            if (i > 0 && s.charAt(i) == '의' && s.charAt(i - 1) != ' ') {
+                s = new StringBuffer(s).replace(i, i + 1, "" + '이').toString();
             }
         }
         char[] uiWithConsonantChar = new char[]{'븨', '즤', '듸', '긔', '싀', '믜', '늬', '릐', '희', '킈', '틔', '츼', '픠', '쁴', '쯰', '띄', '끠', '씌'};
         char[] uiTransferredChar = new char[]{'비', '지', '디', '기', '시', '미', '니', '리', '히', '키', '티', '치', '피', '삐', '찌', '띠', '끼', '씨'};
         for (int i = 0; i < uiWithConsonantChar.length; i++) {
             if (s.contains("" + uiWithConsonantChar[i])) {
-                s = s.replaceAll(""+uiWithConsonantChar[i],""+uiTransferredChar[i]);
+                s = s.replaceAll("" + uiWithConsonantChar[i], "" + uiTransferredChar[i]);
             }
         }
         return s;
@@ -172,10 +163,10 @@ public class Transfer {
      * @return
      */
     private static String addOtherSymbol(String s) {
-        StringBuilder builder=new StringBuilder(s);
-        for ( int i = symbolList.size()-1; i >= 0; i--) {
-            SymbolEntry entry=symbolList.get(i);
-            builder.insert(entry.getOrder(),entry.getSymbol());
+        StringBuilder builder = new StringBuilder(s);
+        for (int i = symbolList.size() - 1; i >= 0; i--) {
+            SymbolEntry entry = symbolList.get(i);
+            builder.insert(entry.getOrder(), entry.getSymbol());
         }
         return builder.toString();
     }
@@ -187,6 +178,24 @@ public class Transfer {
      */
     private static ArrayList<SymbolEntry> getSymbolList() {
         return symbolList;
+    }
+
+    private static class SymbolEntry {
+        private final int order;
+        private final char symbol;
+
+        public SymbolEntry(int order, char symbol) {
+            this.order = order;
+            this.symbol = symbol;
+        }
+
+        public int getOrder() {
+            return order;
+        }
+
+        public char getSymbol() {
+            return symbol;
+        }
     }
 }
 
