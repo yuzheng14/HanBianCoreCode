@@ -72,7 +72,6 @@ public class TransferTest {
     public void HangulToPronunciationTest2(){
         Assert.assertEquals("나는 혼자서 미뢰에 기를 나섣씀니다",hangulTransfer("나는 혼자서 밀회의 길을 나섰습니다"));
         println("[测试成功]: "+"나는 혼자서  밀회의 길을 나섰습니다");
-        //TODO 有问题
         Assert.assertEquals("그러나 이 은밀 한 어둠 소게 나를 뒤쫀는 사라믄 누굼니까",hangulTransfer("그러나 이 은밀 한 어둠 속에 나를 뒤쫓는 사람은 누굽니까"));
         println("[测试成功]: "+"그러나 이 은밀 한 어둠 속에 나를 뒤쫓는 사람은 누굽니까");
         Assert.assertEquals("나는 그를 살피려고 여프로 비키지만 그에게서 다라날 도리가 업슴니다",hangulTransfer("나는 그를 살피려고 옆으로 비키지만  그에게서 달아날 도리가 없습니다"));
