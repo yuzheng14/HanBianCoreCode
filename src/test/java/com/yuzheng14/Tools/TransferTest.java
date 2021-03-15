@@ -93,4 +93,23 @@ public class TransferTest {
         Assert.assertEquals("하지만 바메 어두믈 타서 나는 그드리 매우 난포카게 내 신성한 사당으로 쳐드러가 부정한 타묘그로 시네 제다네서 제무를 강타래가는 거슬 봄니다",hangulTransfer("하지만 밤의 어둠을 타서 나는 그들이 매우 난폭하게 내 신성한 사당으로 쳐들어가 부정한 탐욕으로 신의 제단에서 제물을 강탈해가는 것을 봅니다"));
         println("[测试成功]: "+"하지만 밤의 어둠을 타서 나는 그들이 매우 난폭하게 내 신성한 사당으로 쳐들어가 부정한 탐욕으로 신의 제단에서 제물을 강탈해가는 것을 봅니다");
     }
+
+    @Test
+    public void HandulToPronunciationTest3(){
+        Assert.assertEquals("",hangulTransfer(""));
+        Assert.assertEquals("",hangulTransfer(""));
+        Assert.assertEquals("",hangulTransfer(""));
+        Assert.assertEquals("",hangulTransfer(""));
+        Assert.assertEquals("",hangulTransfer(""));
+        Assert.assertEquals("",hangulTransfer(""));
+        Assert.assertEquals("",hangulTransfer(""));
+        Assert.assertEquals("",hangulTransfer(""));
+        Assert.assertEquals("",hangulTransfer(""));
+        Assert.assertEquals("",hangulTransfer(""));
+        Assert.assertEquals("",hangulTransfer(""));
+        Assert.assertEquals("",hangulTransfer(""));
+        Assert.assertEquals("",hangulTransfer(""));
+        Assert.assertEquals("",hangulTransfer(""));
+
+    }
 }
