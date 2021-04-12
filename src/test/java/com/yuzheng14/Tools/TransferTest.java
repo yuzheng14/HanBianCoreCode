@@ -123,6 +123,19 @@ public class TransferTest {
         Assert.assertEquals("기어근 계절따라 흐터져 가겓찌",hangulTransfer("기억은 계절따라 흩어져 가겠지"));
     }
 
+    @Test
+    public void HangulToPronuncisationTest5(){
+        Assert.assertEquals("사랑해서 날 이즈려해",hangulTransfer("사랑해서 날 잊으려해"));
+        Assert.assertEquals("그런말로 날 아프게해",hangulTransfer("그런말로 날 아프게해"));
+        Assert.assertEquals("왜 그걷빠껜 줄 수 엄는지",hangulTransfer("왜 그것밖엔 줄 수 없는지"));
+        Assert.assertEquals("하루 종일 난 거울 소게",hangulTransfer("하루 종일 난 거울 속에"));
+        Assert.assertEquals("널 그리며 또 마라곤 해",hangulTransfer("널 그리며 또 말하곤 해"));
+        Assert.assertEquals("아픈 사람 그마나라고",hangulTransfer("아픈 사람 그만하라고"));
+        Assert.assertEquals("눈무라 그만 사랑이란 말",hangulTransfer("눈물아 그만 사랑이란 말"));
+        Assert.assertEquals("보내줘 이제는 제발 난 시른데",hangulTransfer("보내줘 이제는 제발 난 싫은데"));
+        Assert.assertEquals("아프기 시른데",hangulTransfer("아프기 싫은데"));
+    }
+
     public void HangulToPronumciationTestMode(){
         Assert.assertEquals("",hangulTransfer(""));
         Assert.assertEquals("",hangulTransfer(""));
