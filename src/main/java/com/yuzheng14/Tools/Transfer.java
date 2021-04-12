@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import static com.yuzheng14.Tools.Korean.*;
 
+/**
+ * @author yuzheng14
+ */
 public class Transfer {
     private static ArrayList<SymbolEntry> symbolList = new ArrayList<>();
 
@@ -112,10 +115,11 @@ public class Transfer {
                             } else {
                                 char c = finalConsonantToDelegateConsonant(builder.charAt(i));
                                 if (c != builder.charAt(i)) {
-                                    if (builder.charAt(i) == 'ㄺ' && builder.charAt(i + 1) == 'ㄱ')
+                                    if (builder.charAt(i) == 'ㄺ' && builder.charAt(i + 1) == 'ㄱ') {
                                         builder.replace(i, i + 1, "" + 'ㄹ');
-                                    else
+                                    } else {
                                         builder.replace(i, i + 1, "" + c);
+                                    }
                                     transfer++;
                                 }
                             }
