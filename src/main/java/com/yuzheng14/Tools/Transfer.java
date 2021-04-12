@@ -81,6 +81,8 @@ public class Transfer {
                                 if (isDoubleFinalConsonant(builder.charAt(i))) {
                                     builder.replace(i, i + 2, splitDoubleFinalConsonant(builder.charAt(i)));
                                     builder.replace(i + 1, i + 2, "" + toAspirated(builder.charAt(i + 1)));
+                                }else if(builder.charAt(i)=='ㅅ'){
+                                    builder.replace(i,i+2,"ㅌ");
                                 } else {
                                     builder.replace(i, i + 2, "" + toAspirated(builder.charAt(i)));
                                 }

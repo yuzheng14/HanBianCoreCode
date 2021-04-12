@@ -96,20 +96,36 @@ public class TransferTest {
 
     @Test
     public void HandulToPronunciationTest3(){
-        Assert.assertEquals("",hangulTransfer(""));
-        Assert.assertEquals("",hangulTransfer(""));
-        Assert.assertEquals("",hangulTransfer(""));
-        Assert.assertEquals("",hangulTransfer(""));
-        Assert.assertEquals("",hangulTransfer(""));
-        Assert.assertEquals("",hangulTransfer(""));
-        Assert.assertEquals("",hangulTransfer(""));
-        Assert.assertEquals("",hangulTransfer(""));
-        Assert.assertEquals("",hangulTransfer(""));
-        Assert.assertEquals("",hangulTransfer(""));
-        Assert.assertEquals("",hangulTransfer(""));
-        Assert.assertEquals("",hangulTransfer(""));
-        Assert.assertEquals("",hangulTransfer(""));
-        Assert.assertEquals("",hangulTransfer(""));
+        Assert.assertEquals("흔들리는 꼳뜰쏘게서",hangulTransfer("흔들리는 꽃들속에서"));
+        Assert.assertEquals("네 샴푸향이 느껴진 거야",hangulTransfer("네 샴푸향이 느껴진 거야"));
+        Assert.assertEquals("스쳐 지나간 건가 뒤 도라보지만",hangulTransfer("스쳐 지나간 건가 뒤 돌아보지만"));
+        Assert.assertEquals("그냥 사남들만 보이는 거야",hangulTransfer("그냥 사남들만 보이는 거야"));
+        Assert.assertEquals("다와가는 집끈처에서",hangulTransfer("다와가는 집근처에서"));
+        Assert.assertEquals("괘니 핸드푼만 만지는 거야",hangulTransfer("괜히 핸드푼만 만지는 거야"));
+        Assert.assertEquals("한번 열라캐 볼까 용기 내 보지만",hangulTransfer("한번 연락해 볼까 용기 내 보지만"));
+        Assert.assertEquals("그냥 내 마음만 아쉬운 거야",hangulTransfer("그냥 내 마음만 아쉬운 거야"));
+        Assert.assertEquals("걷따가 보면 항상 이러케",hangulTransfer("걷다가 보면 항상 이렇게"));
+        Assert.assertEquals("너를 바라만 보던",hangulTransfer("너를 바라만 보던"));
+        Assert.assertEquals("너를 기다린다고 마랄까",hangulTransfer("너를 기다린다고 말할까"));
+    }
 
+    @Test
+    public void HangulToPronunciationTest4(){
+        Assert.assertEquals("이벼른 만남보다 참 쉬운건가봐",hangulTransfer("이별은 만남보다 참 쉬운건가봐"));
+        Assert.assertEquals("차갑끼만 한 사람",hangulTransfer("차갑기만 한 사람"));
+        Assert.assertEquals("내 맘 다 가져간 걸 왜 알찌 모타나",hangulTransfer("내 맘 다 가져간 걸 왜 알지 못하나"));
+        Assert.assertEquals("보고 시픈 그 사람",hangulTransfer("보고 싶은 그 사람"));
+        Assert.assertEquals("사랑핸나봐 이즐 수 엄나봐",hangulTransfer("사랑했나봐 잊을 수 없나봐"));
+        Assert.assertEquals("자꾸 생강나 견딜 수가 업써",hangulTransfer("자꾸 생각나 견딜 수가 없어"));
+        Assert.assertEquals("후회핸나봐 널 기다리나봐",hangulTransfer("후회했나봐 널 기다리나봐"));
+        Assert.assertEquals("또 나도 가슴 설레어와",hangulTransfer("또 나도 가슴 설레어와"));
+        Assert.assertEquals("저기 널 달믄 뒫 모스베",hangulTransfer("저기 널 닮은 뒷 모습에"));
+        Assert.assertEquals("기어근 계절따라 흐터져 가겓찌",hangulTransfer("기억은 계절따라 흩어져 가겠지"));
+    }
+
+    public void HangulToPronumciationTestMode(){
+        Assert.assertEquals("",hangulTransfer(""));
+        Assert.assertEquals("",hangulTransfer(""));
+        Assert.assertEquals("",hangulTransfer(""));
     }
 }

@@ -23,6 +23,8 @@
 * 测试`HangulTransfer()`
 ## 2021.2.2
 * 解决`jamosToPronunciation()`中鼻音化的问题
+## 2021.4.12
+* 解决ㅅ和ㅎ连读时音变错误的bug
 
 ## 待更新列表
 **暂无**
