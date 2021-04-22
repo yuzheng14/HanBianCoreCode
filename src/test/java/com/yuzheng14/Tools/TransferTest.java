@@ -124,7 +124,7 @@ public class TransferTest {
     }
 
     @Test
-    public void HangulToPronuncisationTest5(){
+    public void HangulToPronunciationTest5(){
         Assert.assertEquals("사랑해서 날 이즈려해",hangulTransfer("사랑해서 날 잊으려해"));
         Assert.assertEquals("그런말로 날 아프게해",hangulTransfer("그런말로 날 아프게해"));
         Assert.assertEquals("왜 그걷빠껜 줄 수 엄는지",hangulTransfer("왜 그것밖엔 줄 수 없는지"));
@@ -135,6 +135,21 @@ public class TransferTest {
         Assert.assertEquals("보내줘 이제는 제발 난 시른데",hangulTransfer("보내줘 이제는 제발 난 싫은데"));
         Assert.assertEquals("아프기 시른데",hangulTransfer("아프기 싫은데"));
     }
+
+    @Test
+    public void HangulToPronunciationTest6(){
+        Assert.assertEquals("지울 수 가 엄는 너니",hangulTransfer("지울 수 가 없는 너니"));
+        Assert.assertEquals("왜 이리 미려나니 난",hangulTransfer("왜 이리 미련하니 난"));
+        Assert.assertEquals("내게 저놔하지 마",hangulTransfer("내게 전화하지 마"));
+        Assert.assertEquals("난 기대하게 돼",hangulTransfer("난 기대하게 돼"));
+        Assert.assertEquals("올 거 아니자나 그럼 놔",hangulTransfer("올 거 아니잖아 그럼 놔"));
+        Assert.assertEquals("습꽌처럼 차자 와",hangulTransfer("습관처럼 찾아 와"));
+        Assert.assertEquals("날 갇꼬 놀찌 마",hangulTransfer("날 갖고 놀지 마"));
+        Assert.assertEquals("다 끈낟따면서 대체 왜",hangulTransfer("다 끝났다면서 대체 왜"));
+        Assert.assertEquals("넌 참 나빠 난 또 아파",hangulTransfer("넌 참 나빠 난 또 아파"));
+        Assert.assertEquals("넌 벼난 게 업써",hangulTransfer("넌 변한 게 없어"));
+    }
+
 
     public void HangulToPronumciationTestMode(){
         Assert.assertEquals("",hangulTransfer(""));
